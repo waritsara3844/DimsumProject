@@ -74,6 +74,14 @@ const getMenuByID = (req, res) => {
   });
 };
 
+const getAllMenu = (req, res) => {
+  Menu.getAllMenu((err, data) => {
+    if (err) {
+      res.status(500).send({ message: err.message || "Some error occured" });
+    } else res.send(data);
+  });
+};
+
 const removeMenuByID = (req, res) => {
   Menu.deleteMenu(req.params.id, (err, result) => {
     if (err) {
@@ -96,4 +104,5 @@ module.exports = {
   updateMenu,
   getMenuByID,
   removeMenuByID,
+  getAllMenu,
 };

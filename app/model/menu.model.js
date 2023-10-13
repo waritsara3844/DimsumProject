@@ -83,4 +83,15 @@ Menu.deleteMenu = (id, result) => {
     result(null, { id: id });
   });
 };
+
+Menu.getAllMenu = (result) => {
+  sql.query("SELECT * FROM menu", (err, res) => {
+    if (err) {
+      console.log("error: " + err);
+      result(err, null);
+      return;
+    }
+    result(null, res);
+  });
+};
 module.exports = Menu;
