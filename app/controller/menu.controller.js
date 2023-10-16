@@ -9,7 +9,7 @@ const addNewMenu = (req, res) => {
     detail: req.body.detail,
     price: req.body.price,
     category: req.body.category,
-    sold_amount: req.body.sold_amount,
+    sold_amount: 0,
   });
 
   Menu.createNewMenu(menuObject, (err, data) => {

@@ -9,7 +9,7 @@ const Menu = function (menu) {
 };
 
 Menu.createNewMenu = (newMenu, result) => {
-  sql.query("INSERT INTO menu SET ?", newMenu, (err, res) => {
+  sql.query("INSERT INTO menus SET ?", newMenu, (err, res) => {
     if (err) {
       console.log("error: ", err);
       result(err, null);
@@ -21,7 +21,7 @@ Menu.createNewMenu = (newMenu, result) => {
 };
 
 Menu.category = (category, result) => {
-  sql.query("SELECT * FROM menu WHERE category = ?", category, (err, res) => {
+  sql.query("SELECT * FROM menus WHERE category = ?", category, (err, res) => {
     if (err) {
       console.log("Query err:" + err);
       result(err, null);
@@ -56,7 +56,7 @@ Menu.updateMenu = (id, data, result) => {
 };
 
 Menu.getMenu = (id, result) => {
-  sql.query(`SELECT * FROM menu WHERE id=${id}`, (err, res) => {
+  sql.query(`SELECT * FROM menus WHERE id=${id}`, (err, res) => {
     console.log(err);
     if (err) {
       console.log("Error: " + err);
@@ -69,7 +69,7 @@ Menu.getMenu = (id, result) => {
 };
 
 Menu.deleteMenu = (id, result) => {
-  sql.query(`DELETE FROM menu WHERE id=${id}`, (err, res) => {
+  sql.query(`DELETE FROM menus WHERE id=${id}`, (err, res) => {
     if (err) {
       console.log("error : " + err);
       result(err, null);
@@ -85,7 +85,7 @@ Menu.deleteMenu = (id, result) => {
 };
 
 Menu.getAllMenu = (result) => {
-  sql.query("SELECT * FROM menu", (err, res) => {
+  sql.query("SELECT * FROM menus", (err, res) => {
     if (err) {
       console.log("error: " + err);
       result(err, null);

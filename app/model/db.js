@@ -13,4 +13,10 @@ connection.connect((error) => {
     console.log("MySQL connection:" + error);
   } else console.log("Successfully connected to the database");
 });
+
+setInterval(function () {
+  connection.ping((err) => {
+    if (err) throw err;
+  });
+}, 5000);
 module.exports = connection;
