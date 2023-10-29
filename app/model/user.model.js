@@ -60,7 +60,7 @@ User.login = (account, result) => {
             expiresIn: expireTime,
           });
           console.log("Login success Token was generated " + token);
-          res[0].password = token;
+          res[0].accessToken = token;
           result(null, res[0]);
           return;
         } else {

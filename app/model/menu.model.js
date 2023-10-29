@@ -38,7 +38,7 @@ Menu.category = (category, result) => {
 
 Menu.updateMenu = (id, data, result) => {
   sql.query(
-    `UPDATE menu SET name='${data.name}', detail='${data.detail}', price='${data.price}', category='${data.category}', sold_amount='${data.sold_amount}' WHERE id = '${id}'`,
+    `UPDATE menus SET name='${data.name}', detail='${data.detail}', price='${data.price}', category='${data.category}', sold_amount='${data.sold_amount}' WHERE id = '${id}'`,
     (err, res) => {
       if (err) {
         console.log("Error:" + err);
