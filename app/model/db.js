@@ -6,6 +6,7 @@ const connection = mysql.createConnection({
   user: dbConfig.USER,
   password: dbConfig.PASSWORD,
   database: dbConfig.DB,
+  multipleStatements: true,
 });
 
 connection.connect((error) => {
@@ -19,4 +20,5 @@ setInterval(function () {
     if (err) throw err;
   });
 }, 5000);
+
 module.exports = connection;

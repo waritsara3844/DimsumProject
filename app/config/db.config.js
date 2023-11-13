@@ -2,10 +2,6 @@ module.exports = {
   // HOST: "localhost",
   // USER: "root",
   // PASSWORD: "",
-  // DB: "dimsum",
-  // HOST: "localhost",
-  // USER: "root",
-  // PASSWORD: "",
   // DB: "myapi"
   HOST: "sql.freedb.tech",
   USER: "freedb_admin_dimsum",
