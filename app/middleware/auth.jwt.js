@@ -1,5 +1,6 @@
 const jwt = require("jsonwebtoken");
 const scKey = require("../config/jwt.config");
+
 const verifyToken = (req, res, next) => {
   const token = req.headers["x-access-token"];
   if (!token) {

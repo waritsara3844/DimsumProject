@@ -55,6 +55,16 @@ Menu.updateMenu = (id, data, result) => {
   );
 };
 
+Menu.updateSoldAmount = (menus) => {
+  let queries = "";
+  menus.forEach((menu) => {
+    queries += sql.format(
+      `UPDATE menus SET sold_amount = sold_amount + ${menu.quantity} WHERE id = ${menu.id}; `
+    );
+  });
+  return sql.promise().query(queries);
+};
+
 Menu.getMenu = (id, result) => {
   sql.query(`SELECT * FROM menus WHERE id=${id}`, (err, res) => {
     console.log(err);
