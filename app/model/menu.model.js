@@ -69,19 +69,33 @@ Menu.getMenu = (id, result) => {
 };
 
 Menu.deleteMenu = (id, result) => {
-  sql.query(`DELETE FROM menus WHERE id=${id}`, (err, res) => {
-    if (err) {
-      console.log("error : " + err);
-      result(err, null);
-      return;
+  sql.query(
+    `DELETE FROM carts_menus WHERE menu_id = ${id}`,
+    (updateErr, updateRes) => {
+      if (updateErr) {
+        console.log("Error updating related records: " + updateErr);
+        result(updateErr, null);
+        return;
+      }
+
+      // After updating related records, delete the menu item
+      sql.query(`DELETE FROM menus WHERE id=${id}`, (deleteErr, deleteRes) => {
+        if (deleteErr) {
+          console.log("Error deleting menu: " + deleteErr);
+          result(deleteErr, null);
+          return;
+        }
+
+        if (deleteRes.affectedRows == 0) {
+          result({ kind: "not_found" }, null);
+          return;
+        }
+
+        console.log("Deleted menu with id: " + id);
+        result(null, { id: id });
+      });
     }
-    if (res.affectedRows == 0) {
-      result({ kind: "not_found" }, null);
-      return;
-    }
-    console.log("Deleted menu with id: " + id);
-    result(null, { id: id });
-  });
+  );
 };
 
 Menu.getAllMenu = (result) => {

@@ -92,7 +92,7 @@ const removeMenuByID = (req, res) => {
       } else {
         res
           .status(500)
-          .send({ message: "Error delete menu: " + req.params + id });
+          .send({ message: "Error delete menu: " + req.params.id });
       }
     } else res.send(result);
   });

@@ -6,9 +6,9 @@ const bcrypt = require("bcryptjs");
 const expireTime = "2h";
 
 const User = function (user) {
-  (this.email = user.email),
-    (this.username = user.username),
-    (this.password = user.password);
+  this.email = user.email;
+  this.username = user.username;
+  this.password = user.password;
 };
 
 User.checkUsername = (username, result) => {
@@ -26,12 +26,16 @@ User.checkUsername = (username, result) => {
     result({ kind: "not_found" }, null);
   });
 };
+
 User.signup = (newUser, result) => {
   sql.query("INSERT INTO users SET ?", newUser, (err, res) => {
     if (err) {
       console.log("Query error: " + err);
       result(err, null);
     }
+
+    sql.promise().query("INSERT INTO carts SET ?", { user_id: res.insertId });
+
     const token = jwt.sign({ id: res.insertId }, secret.secret, {
       expiresIn: expireTime,
     });
@@ -41,10 +45,11 @@ User.signup = (newUser, result) => {
 };
 
 User.login = (account, result) => {
+  console.log(account);
   sql.query(
-    "SELECT * FROM users WHERE username = ?",
-    [account.username],
+    `SELECT u.*,c.id as cart_id FROM users u  JOIN carts c ON c.user_id = u.id WHERE username = "${account.username}"`,
     (err, res) => {
+      console.log(res);
       if (err) {
         console.log("err:" + err);
         result(err, null);
